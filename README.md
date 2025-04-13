@@ -1,6 +1,3 @@
-Here’s a simple and clear README note on **Python File Handling** and **Modules & Packages**, perfect for your personal notes or a GitHub repo:
-
----
 
 # 📘 Python: File Handling, Modules & Packages
 
@@ -125,7 +122,3 @@ print(datetime.datetime.now())
 - **Modules** make code reusable and organized.
 - **Packages** are collections of modules.
 - Use **built-in** or **custom modules** to organize your project efficiently.
-
----
-
-Let me know if you'd like a PDF version or want this turned into a GitHub README format with styling!

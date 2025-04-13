@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Handling and Modules & Packages in python</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>File Handling in python</h1>
+    <h3>File handling in Python is an essential skill for reading from and writing to files. Python provides built-in functions and methods to perform operations like opening, reading, writing, and closing files. Here's a comprehensive guide to file handling in Python.
+</h3>
+
+<div class="div">
+    <h2>**Basic Operations in File Handling:**</h2>
+<li> **Opening a file**</li>
+<li>**Reading from a file**</li>
+<li> **Writing to a file**</li>
+<li> **Closing a file**</li>
+
+<h2>Opening a File</h2>
+
+<li>To perform any operation on a file (reading, writing, etc.), you first need to **open** the file. You can open a file using Python's built-in `open()` function. The basic syntax is:
+</li>
+<p>
+file_object = open('filename', 'mode')
+</p>
+
+<h3>Here, `'filename'` is the name of the file you want to open, and `'mode'` is the operation you want to perform on the file. The mode determines how you open the file.
+</h3>
+<p>File Modes:</p>
+<li>r'**: Read (default). Opens a file for reading.</li>
+<li>w'**: Write. Opens a file for writing (creates a new file or overwrites an existing file).</li>
+<li>'a'**: Append. Opens a file for writing (creates a new file if it doesn't exist, and appends to the file if it exists).</li>
+<li>'rb'**: Read in binary mode.</li>
+<li>'wb'**: Write in binary mode.</li>
+<li>r+'**: Read and write.</li>
+<li>w+'**: Write and read (creates a new file or overwrites an existing file).</li>
+<li>'a+'**: Append and read.</li>
+
+<p>
+# Open file for reading (default mode) <br>
+file = open("example.txt", "r") <br>
+
+# Open file for writing (this will overwrite the file) <br>
+file = open("example.txt", "w") <br>
+</p>
+
+ <h2>Reading from a File</h2>
+
+<li>After opening a file in read mode (`'r'`), you can use several methods to read the contents of the file.
+</li>
+<p>Methods for Reading:</p>
+<li>`read()`**: Reads the entire content of the file.</li>
+<li>`readline()`**: Reads one line at a time.</li>
+<li>`readlines()`**: Reads all lines into a list, where each item in the list is a line from the file.</li>
+
+<p>
+# Reading the entire file <br>
+file = open("example.txt", "r")<br>
+content = file.read()<br>
+print(content)<br>
+file.close()<br>
+
+# Reading one line at a time<br>
+file = open("example.txt", "r")<br>
+line = file.readline()  # Reads the first line<br>
+print(line)<br>
+file.close()<br>
+
+# Reading all lines into a list<br>
+file = open("example.txt", "r")<br>
+lines = file.readlines()  # Returns a list of lines<br>
+print(lines)<br>
+file.close()<br>
+</p>
+<h2>3. Writing to a File</h2>
+
+<li>You can write to a file by opening it in write mode (`'w'`) or append mode (`'a'`). If you open the file in write mode (`'w'`), it will overwrite the content of the file. If you open it in append mode (`'a'`), it will add data to the end of the file.
+</li>
+<p> Methods for Writing:</p>
+<li>`write()`**: Writes a string to the file.</li>
+<li>`writelines()`**: Writes a list of strings to the file.</li>
+
+<p>
+# Writing to a file (this will overwrite existing content)<br>
+file = open("example.txt", "w")<br>
+file.write("Hello, World!\n")<br>
+file.write("This is a new line.")<br>
+file.close()<br>
+
+# Appending to a file (this will add content to the end)<br>
+file = open("example.txt", "a")<br>
+file.write("\nThis is an appended line.")<br>
+file.close()<br>
+
+# Writing multiple lines from a list<br>
+file = open("example.txt", "w")<br>
+lines = ["Line 1\n", "Line 2\n", "Line 3\n"]<br>
+file.writelines(lines)<br>
+file.close()<br>
+</p>
+
+<h2>Closing a File</h2>
+
+<li>After performing any file operations, it is important to **close** the file to free up system resources. You can close the file using the `.close()` method.
+</li>
+<p>
+file.close()
+</p>
+
+<li>Using `with` Statement (Context Manager)</li>
+
+<li>A better and more efficient way to handle files in Python is by using the `with` statement, which automatically handles the opening and closing of files. This method ensures that the file is closed, even if an error occurs during the operations.
+</li>
+<p>
+# Using 'with' to open and read a file<br>
+with open("example.txt", "r") as file:<br>
+    content = file.read()<br>
+    print(content)<br>
+
+# Using 'with' to write to a file<br>
+with open("example.txt", "w") as file:<br>
+    file.write("This is a new file.")<br>
+
+
+<li>With the `with` statement, you don't have to explicitly call `file.close()`—it’s automatically done when the block is exited, even if an error occurs.</li>
+</p>
+<h2>File Handling with Binary Files</h2>
+
+<li>To work with binary files (such as images, audio files, etc.), you can open the file in binary mode by using the `b` in the mode string (e.g., `'rb'`, `'wb'`).
+</li>
+<p>
+# Reading a binary file
+with open("image.jpg", "rb") as file:
+    binary_data = file.read()
+    print(binary_data)
+</p>
+
+<h2>File Operations (Other Functions)</h2>
+
+<li>`seek()`: Moves the file pointer to a specific position.</li>
+<p>
+   with open("example.txt", "r") as file:
+       file.seek(5)  # Moves the pointer to the 5th byte
+       print(file.read())  # Reads from the 5th byte onward
+   </p>
+
+<li>tell()`: Returns the current position of the file pointer.</li>
+<p>
+   with open("example.txt", "r") as file:
+       file.seek(5)
+       print(file.tell())  # Output: 5 (current pointer position)
+   </p>
+
+<li>`truncate()`: Resizes the file to a given size (if used with write modes).</li>
+  <p>
+   with open("example.txt", "w") as file:
+       file.write("Hello World")
+       file.truncate(5)  # Reduces the file content to 5 characters
+   </p>
+
+<li>`flush()`**: Forces the internal buffer to be written to the file.</li>
+   <p>
+   with open("example.txt", "w") as file:
+       file.write("Hello World")
+       file.flush()  # Ensures the content is written immediately
+   </p>
+
+</div>
+
+<div class="div1">
+<h1>modules</h1>
+<h3>In Python, **modules** and **packages** are key concepts that allow you to organize your code and reuse functionality. They help break down large projects into smaller, manageable pieces and provide access to a wealth of functionality from Python's standard library or third-party libraries.
+</h3>
+<h2>What is a Module?</h2>
+
+<li>A **module** is simply a Python file that contains Python definitions and statements. A module can define functions, classes, and variables, and can include runnable code. It allows you to organize your Python code into separate files, making it more modular and maintainable.
+</li>
+<h2> How to Create a Module:</h2>
+<li>To create a module, you simply write a Python file (`.py` extension) containing some code. For example:
+</li>
+<p>
+# file: mymodule.py <br>
+def greet(name): <br>
+    return f"Hello, {name}!" <br> <br>
+
+def add(a, b): <br>
+    return a + b 
+</p>
+
+<li>You can then use this module in another Python file by importing it.
+</li>
+<h2>How to Use a Module:</h2>
+<li>You use the `import` statement to import and use a module.
+</li>
+<p>
+# file: main.py <br>
+import mymodule <br> <br>
+
+result = mymodule.add(3, 5) <br>
+print(result)  # Output: 8 <br> <br>
+
+greeting = mymodule.greet("Alice") <br>
+print(greeting)  # Output: Hello, Alice!
+</p>
+<li>You can also import specific functions or variables from a module using the `from` keyword:
+</li>
+<p>
+# file: main.py <br>
+from mymodule import greet <br><br>
+
+message = greet("Bob")br
+print(message)  # Output: Hello, Bob! <br>
+</p>
+
+<h2>Useful Module Functions:</h2>
+<li>`dir()`**: Lists the functions and variables defined in the module.</li>
+ <p>
+  import mymodule
+  print(dir(mymodule))
+  </p>
+
+<p>`help()`: Provides documentation for the module.</p>
+ <p>
+  help(mymodule)
+  </p>
+</div>
+<div class="div2">
+<h1>Package</h1>
+
+<h3>A **package** is a way of organizing multiple modules in a directory hierarchy. A package is simply a directory that contains multiple Python modules and a special `__init__.py` file, which can be empty but marks the directory as a Python package.
+</h3>
+<h2> Structure of a Package:</h2>
+<p>A package is a directory that contains:</p>
+<li> A special file `__init__.py` (can be empty).</li>
+<li>Multiple Python module files (`.py` files).</li>
+
+<p>
+my_package/ <br>
+    __init__.py <br>
+    module1.py <br>
+    module2.py <br>
+    sub_package/ <br>
+        __init__.py <br>
+        module3.py 
+        </p>
+
+<h2>How to Create a Package:</h2>
+
+<li>You can create a package by creating a directory with an `__init__.py` file and putting your modules inside that directory.
+</li>
+<li>For example, a package `my_package` with two modules `module1.py` and `module2.py` might look like this:
+</li>
+<p>
+my_package/ <br>
+    __init__.py <br>
+    module1.py <br>
+    module2.py <br>
+</p>
+
+<li>The `__init__.py` file is what makes Python treat the directory as a package. Even though it's often empty, it can also be used to initialize the package or expose specific functions when the package is imported.
+</li>
+<h2>How to Use a Package:</h2>
+
+<li>You can import modules or specific functions from a package in the following ways:
+</li>
+<p>
+# file: main.py <br>
+import my_package.module1 <br> <br>
+
+result = my_package.module1.some_function()
+</p>
+<h2>Installing and Using Third-Party Packages:</h2>
+
+<li>Python has a massive ecosystem of third-party packages available through the **Python Package Index (PyPI)**. To install these packages, you typically use the package manager `pip`.
+</li>
+<p>
+```bash <br>
+pip install requests
+</p>
+
+<li>Once installed, you can import and use the package in your Python code:
+</li>
+<p>
+import requests <br> <br>
+
+response = requests.get('https://example.com') <br>
+print(response.text)
+</p>
+
+<h2>Common Python Packages:</h2>
+
+<p>Some commonly used Python packages include:</p>
+<li>`requests`: A simple HTTP library for making requests.</li>
+<li>`numpy`: A package for scientific computing, especially for working with arrays.</li>
+<li>`pandas`: A library for data manipulation and analysis.</li>
+<li>`matplotlib`: A plotting library.</li>
+<li>`flask`: A lightweight web framework for building web applications.</li>
+<li>`django`: A full-stack web framework for building large-scale web applications.</li>
+
+<h2>Namespace and Package Hierarchy:</h2>
+
+<li>When you import modules or packages, Python keeps track of the "namespace" to avoid naming conflicts. For example, if two modules in the same package have the same function name, Python still knows which one to use based on the package/module hierarchy.
+</li>
+<p>
+# Importing different modules from the same package <br>
+from my_package import module1 <br>
+from my_package import module2 <br> <br>
+
+# Calling functions from different modules <br>
+module1.function()
+module2.function()
+</p>
+
+</div>
+</body>
+</html>
